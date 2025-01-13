@@ -56,7 +56,7 @@ func LoginUser(c *gin.Context) {
 	err = utils.CheckPassword(user.Password, input.Password)
 	if err != nil {
 		cache.RDB.Incr(cache.Ctx, key)
-		cache.RDB.Expire(cache.Ctx, key, 30*time.Second)
+		cache.RDB.Expire(cache.Ctx, key, 10*time.Minute)
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Password is incorrect"})
 		return
 	}
